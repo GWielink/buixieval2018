@@ -40,6 +40,10 @@ export default class Backers extends Component {
         let n = 1;
         let index = 0;
         let rows = [];
+        
+        if (backers.length < 5) {
+            return [backers]
+        }
 
         while (index < backers.length) {
             let rowLength = Math.floor(Math.random() * (n * 2)) + 1;
