@@ -1,0 +1,29 @@
+.site {
+	height: 100vh;
+	width: 100vw;
+	background-color: #01ffff;
+	color: #ff99ff;
+}
+
+
+.animated {
+	animation: invert 1s steps(1) infinite;
+}
+
+@keyframes invert {
+	0% {
+		background-color: #01ffff;
+		color: #ff99ff;
+	}
+
+	50% {
+		background-color: #ff99ff;
+		color: #01ffff;
+	}
+
+	100% {
+		background-color: #01ffff;
+		color: #ff99ff;
+	}
+}
+
