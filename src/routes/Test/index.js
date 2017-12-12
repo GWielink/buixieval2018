@@ -51,11 +51,12 @@ export default class TestContainer extends Component {
 }
 
 
-const Grid = ({backers, width, height}) => {
-    if (backers.length === 0) {
+const Grid = ({width, height, backers}) => {
+    if (backers.length === 1) {
         return <Backer
             width={width}
             height={height}
+            backer={backers[0]}
         />
     }
 
@@ -82,17 +83,45 @@ const Grid = ({backers, width, height}) => {
         ];
     };
 
-    
-    return null;
+    let sliced = split();
+    if (sliced[0][0].reverse) {
+        sliced.reverse();
+    }
+    const partition1 = sliced[0].reduce((sum, backer) => (sum + backer.contributed), 0) / totalContributed;
+
+    const width1 = direction === 'col' ? width : width * partition1;
+    const width2 = direction === 'col' ? width : width - width1;
+    const height1 = direction === 'row' ? height : height * partition1;
+    const height2 = direction === 'row' ? height : height - height1;
+
+    return (
+        <div style={{ width: width, height: height, overflow: 'hidden'}}>
+            <div style={{ display: direction === 'row' ? 'inline-block' : 'block', overflow: 'hidden'}}>
+                <Grid backers={sliced[0]} width={width1} height={height1} />
+            </div>
+            <div style={{ display: 'inline-block'}}>
+                <Grid backers={sliced[1]} width={width2} height={height2} />
+            </div>
+        </div>
+    );
 
 };
 
-const Backer = ({width, height}) => {
+const Backer = ({width, height, backer}) => {
+    const className = backer.team === 'p' ? 'pink' : 'blue';
+
     return <div
         style={{
             width: width,
             height: height,
-            backgroundColor: '#' + (Math.random()*0xFFFFFF<<0).toString(16)
+            background: 'url(' + backer.img + ') no-repeat center center',
+            backgroundSize: 'cover',
+            overflow: 'hidden'
         }}
-    />
+    >
+        <div className={'overlay ' + className} >
+            <h4>{backer.name}</h4>
+            <h1>&euro; {backer.contributed}</h1>
+        </div>
+    </div>
 };
