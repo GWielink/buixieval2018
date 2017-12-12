@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './backer.css';
-
 import fetchBackers from '../../functions/fetch-backers';
 
 export default class TestContainer extends Component {
@@ -49,6 +48,7 @@ export default class TestContainer extends Component {
 
         return null;
     }
+<<<<<<< HEAD
 }
 
 
@@ -126,3 +126,6 @@ const Backer = ({width, height, backer}) => {
         </div>
     </div>
 };
+=======
+}
+>>>>>>> parent of 2f91538... Update index.js
