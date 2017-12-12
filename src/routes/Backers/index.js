@@ -48,7 +48,6 @@ export default class TestContainer extends Component {
 
         return null;
     }
-<<<<<<< HEAD
 }
 
 
@@ -126,6 +125,3 @@ const Backer = ({width, height, backer}) => {
         </div>
     </div>
 };
-=======
-}
->>>>>>> parent of 2f91538... Update index.js
