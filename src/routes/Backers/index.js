@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import './backer.css';
 import fetchBackers from '../../functions/fetch-backers';
 
