@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import BackersGrid from './BackersGrid';
 
 import fetchBackers from '../../functions/fetch-backers';
 
