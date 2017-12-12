@@ -4,3 +4,55 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.loader {
+  background: url('./img/loader.png') repeat 0 0;
+  -webkit-animation: .5s linear 0s normal none infinite bgshift;
+  -moz-animation: .5s linear 0s normal none infinite bgshift;
+  -ms-animation: .5s linear 0s normal none infinite bgshift;
+  -o-animation: .5s linear 0s normal none infinite bgshift;
+  animation: .5s linear 0s normal none infinite bgshift;
+  overflow: hidden;
+}
+
+.loader > h1 {
+  font-size: 90px;
+  color: #01ffff;
+  background-color: #ff99ff;
+  padding: 10px;
+  -webkit-animation: 1s ease 0s normal none infinite fontShift;
+  -moz-animation: 1s ease 0s normal none infinite fontShift;
+  -ms-animation: 1s ease 0s normal none infinite fontShift;
+  -o-animation: 1s ease 0s normal none infinite fontShift;
+  animation: 1s ease 0s normal none infinite fontShift;
+}
+
+@keyframes fontShift {
+  from {font-size: 36px;}
+  to {font-size: 194px;}
+}
+
+@-webkit-keyframes bgshift {
+  from {background-position:0 0;}
+  to {background-position: 500px 500px;}
+}
+
+@-moz-keyframes bgshift {
+  from {background-position:0 0;}
+  to {background-position: 500px 500px;}
+}
+
+@-ms-keyframes bgshift {
+  from {background-position:0 0;}
+  to {background-position: 500px 500px;}
+}
+
+@-o-keyframes bgshift {
+  from {background-position:0 0;}
+  to {background-position: 500px 500px;}
+}
+
+@keyframes bgshift {
+  from {background-position:0 0;}
+  to {background-position: 500px 500px;}
+}

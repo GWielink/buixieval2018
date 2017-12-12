@@ -1,4 +1,4 @@
-let path = 'http://buixieval.nl/api';
+let path = 'http://localhost:9000';
 
 // if (window.location.origin === 'http://localhost:3000') {
 //     path = 'http://localhost:9000';

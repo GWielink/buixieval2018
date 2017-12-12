@@ -1,11 +1,3 @@
-.site {
-	height: 100vh;
-	width: 100vw;
-	background-color: #01ffff;
-	color: #ff99ff;
-}
-
-
 .animated {
 	animation: invert 1s steps(1) infinite;
 }

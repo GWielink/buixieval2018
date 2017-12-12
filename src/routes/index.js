@@ -6,15 +6,41 @@ import Admin from './Admin';
 import Opportunities from './Opportunities';
 import Backers from './Backers';
 
-import Test from './Test';
+export const routes = [{
+	path: '/backers',
+	name: 'Backers',
+	component: Backers,
+    exact: true,
+	visible: true,
+}, {
+	path: '/opportunities',
+	name: 'Opportunities',
+	component: Opportunities,
+	exact: true,
+	visible: false,
+}, {
+	path: '/admin',
+	component: Admin,
+	exact: true,
+	visible: false,
+}, {
+	path: '/',
+	name: 'Home',
+	component: Teaser,
+	exact: false,
+	visible: false,
+}];
 
 const Router = () => (
 	<Switch>
-		<Route exact path='/backers' component={Backers} />
-		<Route exact path='/opportunities' component={Opportunities}/>
-		<Route exact path='/admin' component={Admin}/>
-		<Route exact path='/test' component={Test} />
-		<Route path='/' component={Teaser} />
+		{routes.map(route => (
+			<Route
+				key={route.path}
+				exact={route.exact}
+				path={route.path}
+				component={route.component}
+			/>
+		))}
 	</Switch>
 );
 

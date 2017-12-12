@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Panel, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 import FileBase64 from 'react-file-base64';
+import path from '../../apiPath';
 
 import updateBacker from '../../functions/update-backer';
 import addBacker from '../../functions/add-backer';
@@ -106,7 +107,7 @@ export default class BackerForm extends Component {
                             multiple={false}
                             onDone={(file) => this.handleFile(file)}
                         />
-                        <img src={this.state.img} style={{ maxHeight: '100px', maxWidth: '100px'}} />
+                        <img src={path + '/image/' + this.state.id} style={{ maxHeight: '100px', maxWidth: '100px'}} />
                     </div>
 
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginTop: 20}}>
