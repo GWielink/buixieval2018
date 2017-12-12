@@ -10,9 +10,13 @@ export default class BackerForm extends Component {
     constructor (props) {
         super (props);
 
-        this.state = Object.assign({}, this.props.backer, {
-            touched: false
-        });
+        this.state = {
+            touched: false,
+            name: this.props.backer.name,
+            contributed: this.props.backer.contributed,
+            team: this.props.backer.team,
+            id: this.props.backer.id,
+        };
     }
 
     setField = (name, value) => {
@@ -107,7 +111,7 @@ export default class BackerForm extends Component {
                             multiple={false}
                             onDone={(file) => this.handleFile(file)}
                         />
-                        <img src={path + '/image/' + this.state.id} style={{ maxHeight: '100px', maxWidth: '100px'}} />
+                        <img src={this.state.img || path + '/image/' + this.state.id} style={{ maxHeight: '100px', maxWidth: '100px'}} />
                     </div>
 
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginTop: 20}}>

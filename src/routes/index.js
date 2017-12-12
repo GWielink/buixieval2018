@@ -17,7 +17,7 @@ export const routes = [{
 	name: 'Opportunities',
 	component: Opportunities,
 	exact: true,
-	visible: false,
+	visible: true,
 }, {
 	path: '/admin',
 	component: Admin,

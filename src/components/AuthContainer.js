@@ -24,7 +24,16 @@ export default class AuthContainer extends Component {
 
     render () {
         return (
-            <div style={{ display: 'flex', height: '500px', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    height: '100vh',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}
+                className="loader"
+            >
                 <div style={{ width: '50%', textAlign: 'center', padding: 20, background: 'rgba(1,1,1, 0.4)'}}>
                     <h2>Should you even be here?</h2>
                     <input type="password" placeholder="Secret passkey..." className="form-control" onChange={this.handleChange} value={this.state.value} />

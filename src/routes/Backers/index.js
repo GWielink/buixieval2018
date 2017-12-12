@@ -56,6 +56,6 @@ export default class BackersContainer extends Component {
             )
         }
 
-        return <Loader/>;
+        return <Loader />;
     }
 }

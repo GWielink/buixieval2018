@@ -1,37 +1,19 @@
 import React from 'react';
+import Menu from '../../components/Menu';
 
 const Opportunities = () => {
     return (
-        <div
-            style={{
-                height: '100%',
-                width: '100%',
+        <div style={{ height: '100vh', backgroundColor: '#ff99ff', textAlign: 'center'}}>
+            <Menu/>
+            <div style={{
                 display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                fontSize: '24px',
-                padding: 20,
-            }}
-        >
-
-
-            <div style={{ textAlign: 'left' }}>
-                <h1> Opportunities </h1>
-                <p>Hoi doei later</p>
-                <p>Hoi doei later</p>
-                <p>Hoi doei later</p>
-                <p>Hoi doei later</p>
-                <p>Hoi doei later</p>
-            </div>
-
-            <div style={{ textAlign: 'right' }}>
-                <h1> Goals </h1>
-                <p>Hoi doei later</p>
-                <p>Hoi doei later</p>
-                <p>Hoi doei later</p>
-                <p>Hoi doei later</p>
-                <p>Hoi doei later</p>
+                direction: 'column',
+                width: '100%',
+                height: '25%',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <h1 className="animated">COMING SOON</h1>
             </div>
         </div>
     )

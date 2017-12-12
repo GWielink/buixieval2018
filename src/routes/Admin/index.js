@@ -68,6 +68,7 @@ export default class Admin extends Component {
                     +
                 </a>
             </div>
+
         )
     }
 }
