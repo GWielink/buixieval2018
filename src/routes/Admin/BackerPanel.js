@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import { Panel, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 import FileBase64 from 'react-file-base64';
+import {connect} from 'react-redux';
+import {setBackers} from '../../store/actions';
 import path from '../../apiPath';
 
+import fetchBackers from '../../functions/fetch-backers';
 import updateBacker from '../../functions/update-backer';
 import addBacker from '../../functions/add-backer';
 
-export default class BackerForm extends Component {
+class BackerForm extends Component {
     constructor (props) {
         super (props);
 
@@ -16,7 +19,7 @@ export default class BackerForm extends Component {
             contributed: this.props.backer.contributed,
             team: this.props.backer.team,
             id: this.props.backer.id,
-            new: this.props.backe.new,
+            new: this.props.backer.new,
         };
     }
 
@@ -46,7 +49,8 @@ export default class BackerForm extends Component {
                     loading: false,
                     touched: false,
                     new: false,
-                })
+                });
+                this.refetchBackers();
             }).catch(e => {
                 console.log(e);
             });
@@ -64,10 +68,17 @@ export default class BackerForm extends Component {
                 loading: false,
                 touched: false,
             });
+            this.refetchBackers();
         }).catch(e => {
             console.log(e);
         })
     };
+
+    refetchBackers = () => {
+        fetchBackers().then(backers => {
+            this.props.updateBackers(backers);
+        });
+    }
 
     render () {
         return (
@@ -128,5 +139,11 @@ export default class BackerForm extends Component {
             </Panel>
         )
     }
-
 };
+
+const mapStateToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+    updateBackers: backers => dispatch(setBackers(backers))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BackerForm);

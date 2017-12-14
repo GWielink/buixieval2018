@@ -1,32 +1,61 @@
-import React from 'react';
-import backers from '../data';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import Loader from '../components/Loader';
+import {setBackers} from '../store/actions';
+import fetchBackers from '../functions/fetch-backers';
 
-const AppContainer = ({children}) => {
-	const totalContributed = backers.reduce((total, backer) => {
-        return total + backer.contributed
-    }, 0);
+class AppContainer extends Component {
+	constructor (props) {
+		super(props);
 
-	const pinkContributed = backers.filter((backer) => {
-		return backer.team === 'p'
-	}).reduce((total, backer) => {
-		return total + backer.contributed
-	}, 0);
+		this.state = {isReady: false};
+	}
 
-	const pinkPartition = Math.floor((pinkContributed / totalContributed) * 100);
-	const pink = '#01ffff';
-	const blue = '#ff99ff';
-	
-	// TODO: something with document.body.style.background = "";
-	// TODO: store backers somewhere for use on all pages to minimize requests..
-	
-	return (
-		<div style={{ 
-			height: '100vh',
-			background: 'linear-gradient(90deg, ' + pink + ' ' + pinkPartition + '%, ' + blue + '%)', 
-		 }}>
-			{children}
-		</div>
-	)
+	componentDidMount () {
+		fetchBackers().then(backers => {
+			this.props.setBackers(backers);
+			this.setBackground(backers);
+			this.setState({isReady: true});
+		})
+	}
+
+	setBackground (backers) {
+		const total = backers.reduce((sum, backer) => (
+			sum + backer.contributed
+		), 0);
+
+		const pinkPartition = (backers.filter(backer => (backer.team === 'p')).reduce((sum, backer) => (
+			sum + backer.contributed
+		), 0) / total) * 100;
+
+		const {first, second, partition} = pinkPartition < 50 ?
+			{first: "01FFFF", second: "FF99FF", partition: 100 - pinkPartition}
+			:
+			{first: "FF99FF", second: "01FFFF", partition: pinkPartition};
+
+		document.body.style.background = 'linear-gradient(90deg, #' + first
+			+ ' ' + partition + '%, #'+ second + ' ' + partition + '%)';
+	}
+
+	render () {
+		if (!this.state.isReady) {
+			return <Loader/>
+		}
+
+        return (
+			<div style={{ height: '100vh' }}>
+				{this.props.children}
+			</div>
+        )
+	}
 };
 
-export default AppContainer;
+const mapStateToProps = state => ({
+	backers: state.backers
+});
+
+const mapDispatchToProps = dispatch => ({
+	setBackers: backers => dispatch(setBackers(backers))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

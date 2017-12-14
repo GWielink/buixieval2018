@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Grid from './Grid';
-import Loader from '../../components/Loader';
 import Menu from '../../components/Menu';
 
 import './backer.css';
 import fetchBackers from '../../functions/fetch-backers';
 
-export default class BackersContainer extends Component {
+class BackersContainer extends Component {
     constructor (props) {
         super(props);
 
         this.state = {
-            isReady: false,
             width: 0,
             height: 0,
         }
@@ -42,20 +41,21 @@ export default class BackersContainer extends Component {
     };
 
     render () {
-        if (this.state.isReady) {
-
-            return (
-                <div>
-                    <Menu />
-                    <Grid
-                        backers={this.state.backers}
-                        height={this.state.height - 30}
-                        width={this.state.width}
-                    />
-                </div>
-            )
-        }
-
-        return <Loader />;
+        return (
+            <div>
+                <Menu />
+                <Grid
+                    backers={this.props.backers}
+                    height={this.state.height - 30}
+                    width={this.state.width}
+                />
+            </div>
+        )
     }
 }
+
+const mapStateToProps = state => ({
+    backers: state.backers,
+});
+
+export default connect(mapStateToProps)(BackersContainer);

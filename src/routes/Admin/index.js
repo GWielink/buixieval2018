@@ -1,36 +1,22 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {PanelGroup} from 'react-bootstrap';
 import AuthContainer from '../../components/AuthContainer';
 import BackerPanel from './BackerPanel';
 
-import fetchBackers from '../../functions/fetch-backers';
 
-
-export default class Admin extends Component {
+class Admin extends Component {
     constructor (props) {
         super (props);
 
         this.state = {
-            isReady: false,
             authenticated: false,
-            backers: [],
+            backers: this.props.backers,
         }
     }
 
     authenticate = () => {
         this.setState({authenticated: true});
-        this.loadBackers();
-    };
-
-    loadBackers = () => {
-        fetchBackers(true).then((backers) => {
-            this.setState({
-                backers: backers,
-                isReady: true,
-            });
-        }).catch(e => {
-            console.log(e);
-        })
     };
 
     addBacker = () => {
@@ -50,10 +36,6 @@ export default class Admin extends Component {
         if (!this.state.authenticated) {
             return <AuthContainer grantAccess={this.authenticate} />
         }
-        if (!this.state.isReady) {
-            return <h2>Loading...</h2>
-        }
-
         return (
             <div style={{ padding: 50 }}>
                 <PanelGroup style={{ color: 'black' }}>
@@ -68,7 +50,12 @@ export default class Admin extends Component {
                     +
                 </a>
             </div>
-
         )
     }
 }
+
+const mapStateToProps = state => ({
+    backers: state.backers,
+});
+
+export default connect(mapStateToProps)(Admin)

@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
 import Menu from '../../components/Menu';
 import fetchBackers from '../../functions/fetch-backers';
 
 import './site.css';
 
-export default class Teaser extends Component {
+class Teaser extends Component {
 	constructor (props) {
 		super(props);
 
@@ -19,12 +21,6 @@ export default class Teaser extends Component {
 			})
 		}, 5000);
 
-		fetchBackers().then(backers => {
-			this.setState({
-				backed: backers.reduce((sum, backer) => (sum + backer.contributed), 0),
-			})
-		});
-
 		this.setState({
 			interval: interval
 		});
@@ -37,16 +33,23 @@ export default class Teaser extends Component {
 	render () {
 		const style = {
 			fontSize: '19vw',
+			marginTop: 50,
 		};
 
+		const totalBacked = this.props.backers.reduce((sum, backer) => (sum + backer.contributed), 0);
+
 		return (
-			<div style={{ height: 'calc(100vh)', backgroundColor: '#ff99ff', textAlign: 'center'}}>
+			<div style={{ height: 'calc(100vh)', textAlign: 'center'}}>
 				<Menu/>
 				<h1 style={style} className="animated">{this.state.message}</h1>
-				{this.state.backed &&
-				<h1 className="animated">BACKED: &euro;{this.state.backed}</h1>
-				}
+				<h1 className="animated">BACKED: &euro;{totalBacked}</h1>
 			</div>
 		)
 	}
 }
+
+const mapStateToProps = state => ({
+	backers: state.backers,
+});
+
+export default connect(mapStateToProps)(Teaser);

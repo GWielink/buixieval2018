@@ -9,6 +9,7 @@ const Backer = ({width, height, backer}) => {
             width: width,
             height: height,
             background: 'url(' + path + '/image/' + backer.id + ') no-repeat center center',
+            backgroundColor: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
             backgroundSize: 'cover',
             overflow: 'hidden'
         }}

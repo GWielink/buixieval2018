@@ -3,7 +3,7 @@ import Menu from '../../components/Menu';
 
 const Opportunities = () => {
     return (
-        <div style={{ height: '100vh', backgroundColor: '#ff99ff', textAlign: 'center'}}>
+        <div style={{ height: '100vh', textAlign: 'center'}}>
             <Menu/>
             <div style={{
                 display: 'flex',
