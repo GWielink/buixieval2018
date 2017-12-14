@@ -22,7 +22,7 @@ const AppContainer = ({children}) => {
 	return (
 		<div style={{ 
 			height: '100vh',
-			background: 'linear-gradient(90deg, ' + pink + ' ' + pinkPartition + '%, ' + blue + '%), 
+			background: 'linear-gradient(90deg, ' + pink + ' ' + pinkPartition + '%, ' + blue + '%)', 
 		 }}>
 			{children}
 		</div>
