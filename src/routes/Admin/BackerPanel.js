@@ -16,6 +16,7 @@ export default class BackerForm extends Component {
             contributed: this.props.backer.contributed,
             team: this.props.backer.team,
             id: this.props.backer.id,
+            new: this.props.backe.new,
         };
     }
 
