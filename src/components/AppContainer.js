@@ -13,15 +13,18 @@ const AppContainer = ({children}) => {
 	}, 0);
 
 	const pinkPartition = Math.floor((pinkContributed / totalContributed) * 100);
-	const bluePartition = 100 - pinkPartition;
-
+	const pink = '#01ffff';
+	const blue = '#ff99ff';
+	
+	// TODO: something with document.body.style.background = "";
+	// TODO: store backers somewhere for use on all pages to minimize requests..
+	
 	return (
-		<div style={{ height: '100vh' }}>
+		<div style={{ 
+			height: '100vh',
+			background: 'linear-gradient(90deg, ' + pink + ' ' + pinkPartition + '%, ' + blue + '%), 
+		 }}>
 			{children}
-			<div style={{ position:  'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1, overflow: 'hidden' }}>
-				<div style={{ width: pinkPartition + 'vw', height: '100%', backgroundColor: '#01ffff', display: 'inline-block' }} />
-				<div style={{ width: bluePartition + 'vw', height: '100%', backgroundColor: '#ff99ff', display: 'inline-block' }} />
-			</div>
 		</div>
 	)
 };
