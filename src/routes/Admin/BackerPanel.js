@@ -86,6 +86,7 @@ class BackerForm extends Component {
                 collapsible
                 header={(this.state.new ? '*' : '') + this.state.name}
                 eventKey={this.state.id}
+                bsStyle={this.props.backer.team === 'bstuur' ? 'warning' : (this.props.backer.team === 'p' ? 'danger' : 'info')}
             >
                 <form>
                     <FormGroup>
@@ -115,6 +116,7 @@ class BackerForm extends Component {
                         >
                             <option value="p">Pink</option>
                             <option value="b">Blue</option>
+                            <option value="bstuur">Bstuur</option>
                         </FormControl>
                     </FormGroup>
 

@@ -1,8 +1,13 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {backerDisplayDetails} from '../../store/actions';
 import path from '../../apiPath';
 
-const Backer = ({width, height, backer}) => {
-    const className = backer.team === 'p' ? 'pink' : 'blue';
+const Backer = ({width, height, backer, displayDetails}) => {
+    const className = backer.team === 'bstuur' ? 'neutral' : (backer.team === 'p' ? 'pink' : 'blue');
+    const mouseEnter = () => {
+        displayDetails(backer);
+    };
 
     return <div
         style={{
@@ -13,13 +18,16 @@ const Backer = ({width, height, backer}) => {
             backgroundSize: 'cover',
             overflow: 'hidden'
         }}
+
+        onMouseEnter={mouseEnter}
     >
-        <div className={'overlay ' + className} >
-            <h4>{backer.name}</h4>
-            <h4>&euro; {backer.contributed}</h4>
-        </div>
+        <div className={'overlay ' + className} />
     </div>
 };
 
+const mapStateToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+    displayDetails: backer => dispatch(backerDisplayDetails(backer))
+});
 
-export default Backer;
+export default connect(mapStateToProps, mapDispatchToProps)(Backer);

@@ -1,37 +1,58 @@
 import React from 'react';
 import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import {routes} from '../routes';
 
-const Menu = ({match}) => {
+const Menu = ({match, activeBacker, dominant}) => {
     const style={
-        height: '30px',
+        height: '50px',
         display: 'flex',
         direction: 'row',
-        backgroundColor: '#ff99ff'
+        justifyContent: 'space-between',
+        backgroundColor: '#000'
 
     };
 
     return (
         <div style={style}>
-            <NavButton route={{ path: '/', name: 'Buixieval' }} active={match.path === '/'}/>
-            {routes.filter(route => route.visible).map(route => (
-                <NavButton key={route.path} route={route} active={match.path === route.path} />
-            ))}
+            <div style={{ display: 'flex', direction: ''}}>
+                <NavButton route={{ path: '/', name: 'Buixieval' }} active={match.path === '/'} dominant={dominant} />
+                {routes.filter(route => route.visible).map(route => (
+                    <NavButton key={route.path} route={route} active={match.path === route.path} dominant={dominant} />
+                ))}
+            </div>
+            {activeBacker &&
+            <div
+                style={{
+                    margin: 5,
+                    paddingRight: 10,
+                    display: 'flex',
+                    direction: 'column',
+                    justifyItems: 'center',
+                    alignItems: 'center',
+                    textTransform: 'uppercase',
+                    paddingLeft: 10,
+                    color: '#000',
+                    backgroundColor: activeBacker.team === 'bstuur' ? '#FFF' : (activeBacker.team === 'p' ? '#FF99FF' : '#01ffff')
+                }}
+            >
+                {activeBacker.name}: &euro;{activeBacker.contributed}
+            </div>}
         </div>
     );
 };
 
-const NavButton = ({route, active}) => {
+const NavButton = ({route, active, dominant}) => {
     const style = {
-        backgroundColor: active ? '#01ffff' : '#ff99ff',
+        backgroundColor: active ? (dominant === 'p' ? '#FF99FF' : '#01FFFF') : '#000',
         paddingLeft: 10,
         paddingRight: 10,
         margin: 5,
         display: 'flex',
         direction: 'row',
         alignItems: 'center',
-        color: active ? '#ff99ff' : '#01ffff'
+        color: active  ? '#000' : (dominant === 'p' ? '#FF99FF' : '#01FFFF'),
     };
 
     return (
@@ -52,4 +73,9 @@ const NavButton = ({route, active}) => {
     )
 };
 
-export default withRouter(Menu);
+const mapStateToProps = state => ({
+    activeBacker: state.activeBacker,
+    dominant: state.dominantTeam,
+});
+
+export default connect(mapStateToProps)(withRouter(Menu));

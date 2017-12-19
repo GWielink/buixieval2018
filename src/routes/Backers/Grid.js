@@ -34,9 +34,9 @@ const Grid = ({width, height, backers}) => {
     };
 
     let sliced = split();
-    if (sliced[0][0].reverse) {
-        sliced.reverse();
-    }
+    // if (sliced[0][0].reverse) {
+    //     sliced.reverse();
+    // }
     const partition1 = sliced[0].reduce((sum, backer) => (sum + backer.contributed), 0) / totalContributed;
 
     const width1 = direction === 'col' ? width : width * partition1;
@@ -49,7 +49,7 @@ const Grid = ({width, height, backers}) => {
             <div style={{ display: direction === 'row' ? 'inline-block' : 'block', overflow: 'hidden'}}>
                 <Grid backers={sliced[0]} width={width1} height={height1} />
             </div>
-            <div style={{ display: 'inline-block'}}>
+            <div style={{ display: direction === 'row' ? 'inline-block' : 'block', overflow: 'hidden' }}>
                 <Grid backers={sliced[1]} width={width2} height={height2} />
             </div>
         </div>

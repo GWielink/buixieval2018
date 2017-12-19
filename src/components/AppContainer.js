@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Loader from '../components/Loader';
-import {setBackers} from '../store/actions';
+import {setBackers, setDominantTeam} from '../store/actions';
 import fetchBackers from '../functions/fetch-backers';
 
 class AppContainer extends Component {
@@ -15,8 +15,21 @@ class AppContainer extends Component {
 		fetchBackers().then(backers => {
 			this.props.setBackers(backers);
 			this.setBackground(backers);
+			this.setDominantTeam(backers);
 			this.setState({isReady: true});
 		})
+	}
+
+	setDominantTeam (backers) {
+        const total = backers.filter(backer => backer.team !== 'bstuur').reduce((sum, backer) => (
+            sum + backer.contributed
+        ), 0);
+
+        const pinkPartition = (backers.filter(backer => (backer.team === 'p')).reduce((sum, backer) => (
+			sum + backer.contributed
+		), 0) / total);
+
+        this.props.setDominantTeam(pinkPartition > 0.5 ? 'p' : 'b');
 	}
 
 	setBackground (backers) {
@@ -55,7 +68,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	setBackers: backers => dispatch(setBackers(backers))
+	setBackers: backers => dispatch(setBackers(backers)),
+	setDominantTeam: team => dispatch(setDominantTeam(team)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
