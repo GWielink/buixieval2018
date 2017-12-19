@@ -42,7 +42,7 @@ class Teaser extends Component {
 			<div style={{ height: 'calc(100vh)', textAlign: 'center'}}>
 				<Menu/>
 				<h1 style={style} className="animated">{this.state.message}</h1>
-				<h1 className="animated">BACKED: &euro;{totalBacked}</h1>
+				<h1 className="animated">{new Intl.NumberFormat('nl-NL', {style: 'currency', currency: 'EUR'}).format(totalBacked)}</h1>
 			</div>
 		)
 	}
