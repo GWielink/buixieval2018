@@ -33,7 +33,7 @@ class AppContainer extends Component {
 	}
 
 	setBackground (backers) {
-		const total = backers.reduce((sum, backer) => (
+		const total = backers.filter(backer => backer.team !== 'bstuur').reduce((sum, backer) => (
 			sum + backer.contributed
 		), 0);
 

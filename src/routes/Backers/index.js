@@ -45,21 +45,17 @@ class BackersContainer extends Component {
         const pink  = backers.filter(backer => (backer.team === 'p'));
         const blue = backers.filter(backer => (backer.team === 'b'));
 
-        const pinkTotal = backers.reduce((total, backer) => (total + backer.contributed), 0);
-        const blueTotal = backers.reduce((total, backer) => (total + backer.contributed), 0);
+        const pinkTotal = pink.reduce((total, backer) => (total + backer.contributed), 0);
+        const blueTotal = blue.reduce((total, backer) => (total + backer.contributed), 0);
 
         const total = pinkTotal + blueTotal;
         const pinkPartition = pinkTotal / total;
-        const bluePartition = blueTotal / total;
-
 
         const pinkWidth = this.state.direction === 'col' ? this.state.width : this.state.width * pinkPartition;
         const blueWidth = this.state.direction === 'col' ? this.state.width : this.state.width - pinkWidth;
         const pinkHeight = this.state.direction === 'row' ? this.state.height : this.state.height * pinkPartition;
         const blueHeight = this.state.direction === 'row' ? this.state.height : this.state.height - pinkHeight;
-        console.log('blue: ', blue);
-        console.log('blueWidht: ', blueWidth);
-        console.log('blueHeigth: ', blueHeight);
+
         return ({
             pink,
             blue,
@@ -68,19 +64,11 @@ class BackersContainer extends Component {
             blueHeight,
             blueWidth,
         })
-    }
+    };
 
     render () {
         const {pink, blue, pinkHeight, pinkWidth, blueHeight, blueWidth} = this.splitBackers(this.props.backers);
         return (
-            // <div>
-            //     <Menu />
-            //     <Grid
-            //         backers={this.props.backers}
-            //         height={this.state.height - 30}
-            //         width={this.state.width}
-            //     />
-            // </div>
             <div>
                 <Menu /> 
                 <div style={{ width: this.state.width, height: this.state.height, overflow: 'hidden'}}>
