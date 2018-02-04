@@ -11,16 +11,16 @@
 }
 
 .overlay {
+    text-align: right;
     width: 100%;
     height: 100%;
     color: white;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     font-size: 24px;
     text-transform: uppercase;
     opacity: 1;
+    align-items: flex-end;
     -webkit-transition: background 1s ease;
     -moz-transition: background 1s ease;
 }
@@ -29,3 +29,10 @@
     background: rgba(0, 0, 0, 0.3);
 }
 
+.captain-badge {
+    max-width:50px;
+    max-height:50px;
+    width: auto;
+    height: auto;
+    margin: 10px;
+}

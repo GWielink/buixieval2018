@@ -5,6 +5,7 @@ import Teaser from './Teaser';
 import Admin from './Admin';
 import Opportunities from './Opportunities';
 import Backers from './Backers';
+import Captains from './Captains';
 
 export const routes = [{
 	path: '/backers',
@@ -23,6 +24,12 @@ export const routes = [{
 	component: Admin,
 	exact: true,
 	visible: false,
+}, {
+	path: '/captains',
+	name: 'Captains',
+	component: Captains,
+	exact: true,
+	visible: true,
 }, {
 	path: '/',
 	name: 'Home',

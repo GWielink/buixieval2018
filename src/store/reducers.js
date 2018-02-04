@@ -1,4 +1,4 @@
-import {SET_BACKERS, BACKER_DISPLAY_DETAILS, SET_DOMINANT_TEAM} from './actions';
+import {SET_BACKERS, BACKER_DISPLAY_DETAILS, SET_DOMINANT_TEAM, SET_TOP_BACKERS} from './actions';
 
 const initialState = {
     backers: [],
@@ -24,6 +24,11 @@ export default function appReducer (state = initialState, action) {
         case SET_DOMINANT_TEAM:
             return Object.assign({}, state, {
                 dominantTeam: action.team
+            });
+
+        case SET_TOP_BACKERS:
+            return Object.assign({}, state, {
+                topBackers: action.topBackers
             });
 
         default:

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Loader from '../components/Loader';
-import {setBackers, setDominantTeam} from '../store/actions';
+import {setBackers, setDominantTeam, setTopBackers} from '../store/actions';
 import fetchBackers from '../functions/fetch-backers';
 
 class AppContainer extends Component {
@@ -16,8 +16,19 @@ class AppContainer extends Component {
 			this.props.setBackers(backers);
 			this.setBackground(backers);
 			this.setDominantTeam(backers);
+			this.setTopBackers(backers);
 			this.setState({isReady: true});
-		})
+		});
+	}
+
+	setTopBackers (backers) {
+		const topPink = backers.filter(backer => backer.team === 'p')[0];
+		const topBlue = backers.filter(backer => backer.team === 'b')[0];
+
+		this.props.setTopBackers({
+			pink: topPink,
+			blue: topBlue,
+		});
 	}
 
 	setDominantTeam (backers) {
@@ -33,7 +44,7 @@ class AppContainer extends Component {
 	}
 
 	setBackground (backers) {
-		const total = backers.filter(backer => backer.team !== 'bstuur').reduce((sum, backer) => (
+		const total = backers.reduce((sum, backer) => (
 			sum + backer.contributed
 		), 0);
 
@@ -70,6 +81,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	setBackers: backers => dispatch(setBackers(backers)),
 	setDominantTeam: team => dispatch(setDominantTeam(team)),
+	setTopBackers: topBackers => dispatch(setTopBackers(topBackers)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

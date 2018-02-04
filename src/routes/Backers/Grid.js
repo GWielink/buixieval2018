@@ -34,9 +34,9 @@ const Grid = ({width, height, backers}) => {
     };
 
     let sliced = split();
-    if (sliced[0][0].reverse) {
-        sliced.reverse();
-    }
+    // if (sliced[0][0].reverse) {
+    //     sliced.reverse();
+    // }
     const partition1 = sliced[0].reduce((sum, backer) => (sum + backer.contributed), 0) / totalContributed;
 
     const width1 = direction === 'col' ? width : width * partition1;
