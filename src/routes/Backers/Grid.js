@@ -14,12 +14,12 @@ const Grid = ({width, height, backers}) => {
     const direction = width > height ? 'row' : 'col';
 
     const split = () => {
-        let i = 1;
+        let i = 2;
         let previousDiff = 9999;
         let first = backers.slice(0, 1).reduce((sum, backer) => (sum + backer.contributed), 0);
         let diff = Math.abs(first - (totalContributed - first));
 
-        while (diff < previousDiff) {
+        while (diff < previousDiff && i < backers.length) {
             first = backers.slice(0, i).reduce((sum, backer) => (sum + backer.contributed), 0);
 
             previousDiff = diff;
@@ -34,9 +34,10 @@ const Grid = ({width, height, backers}) => {
     };
 
     let sliced = split();
-    // if (sliced[0][0].reverse) {
-    //     sliced.reverse();
-    // }
+    if (sliced[0][0].reverse) {
+        sliced.reverse();
+    }
+
     const partition1 = sliced[0].reduce((sum, backer) => (sum + backer.contributed), 0) / totalContributed;
 
     const width1 = direction === 'col' ? width : width * partition1;
