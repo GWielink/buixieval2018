@@ -45,12 +45,14 @@ class BackersContainer extends Component {
         const pink  = backers.filter(backer => (backer.team === 'p'));
         const blue = backers.filter(backer => (backer.team === 'b'));
 
-        const pinkTotal = backers.reduce((total, backer) => (total + backer.contributed), 0);
-        const blueTotal = backers.reduce((total, backer) => (total + backer.contributed), 0);
+        const pinkTotal = pink.reduce((total, backer) => (total + backer.contributed), 0);
+        const blueTotal = blue.reduce((total, backer) => (total + backer.contributed), 0);
+
+        console.log('BlueTotal: ', blueTotal);
+        console.log('PinkTotal: ', pinkTotal);
 
         const total = pinkTotal + blueTotal;
         const pinkPartition = pinkTotal / total;
-        const bluePartition = blueTotal / total;
 
         const pinkWidth = this.state.direction === 'col' ? this.state.width : this.state.width * pinkPartition;
         const blueWidth = this.state.direction === 'col' ? this.state.width : this.state.width - pinkWidth;
@@ -65,21 +67,13 @@ class BackersContainer extends Component {
             blueHeight,
             blueWidth,
         })
-    }
+    };
 
     render () {
         const {pink, blue, pinkHeight, pinkWidth, blueHeight, blueWidth} = this.splitBackers(this.props.backers);
         return (
-            // <div>
-            //     <Menu />
-            //     <Grid
-            //         backers={this.props.backers}
-            //         height={this.state.height - 30}
-            //         width={this.state.width}
-            //     />
-            // </div>
             <div>
-                <Menu /> 
+                <Menu />
                 <div style={{ width: this.state.width, height: this.state.height, overflow: 'hidden'}}>
                     <div style={{ display: this.state.direction === 'row' ? 'inline-block' : 'block', overflow: 'hidden'}}>
                         <Grid backers={pink} width={pinkWidth} height={pinkHeight} />

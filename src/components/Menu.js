@@ -1,22 +1,30 @@
 import React from 'react';
+import ResponsiveMenu from 'react-responsive-navbar';
 import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {routes} from '../routes';
 
+const NewMenu = ({match, activeBacker, dominant}) => (<ResponsiveMenu
+    menuOpenButton={<span>o</span>}
+    menuCloseButton={<span>c</span>}
+    changeMenuOn="700px"
+    menu={<Menu match={match} activeBacker={activeBacker} dominant={dominant} />}
+/>);
+
+
 const Menu = ({match, activeBacker, dominant}) => {
     const style={
-        height: '50px',
         display: 'flex',
-        direction: 'row',
+        direction: 'column',
         justifyContent: 'space-between',
-        backgroundColor: '#000'
-
+        backgroundColor: '#000',
+        height: '50px',
     };
 
     return (
         <div style={style}>
-            <div style={{ display: 'flex', direction: ''}}>
+            <div style={{ display: 'block', direction: 'column'}}>
                 <NavButton route={{ path: '/', name: 'Buixieval' }} active={match.path === '/'} dominant={dominant} />
                 {routes.filter(route => route.visible).map(route => (
                     <NavButton key={route.path} route={route} active={match.path === route.path} dominant={dominant} />
@@ -49,8 +57,10 @@ const NavButton = ({route, active, dominant}) => {
         paddingLeft: 10,
         paddingRight: 10,
         margin: 5,
-        display: 'flex',
-        direction: 'row',
+        height: '40px',
+        lineHeight: '40px',
+        display: 'inline-block',
+        direction: 'column',
         alignItems: 'center',
         color: active  ? '#000' : (dominant === 'p' ? '#FF99FF' : '#01FFFF'),
     };
@@ -78,4 +88,4 @@ const mapStateToProps = state => ({
     dominant: state.dominantTeam,
 });
 
-export default connect(mapStateToProps)(withRouter(Menu));
+export default connect(mapStateToProps)(withRouter(NewMenu));
