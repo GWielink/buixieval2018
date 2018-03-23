@@ -9,21 +9,33 @@ const personalOpportunities = [{
     text: 'Get 25 Buixieval stickers'
 }, {
     cost: 10,
-    text: 'Get a unique surprise gift *'
+    text: 'Get a team cap. (decoration can be earned)'
+}, {
+    cost: 15,
+    text: 'Spot on the Capstok'
 }, {
     cost: 25,
-    text: 'Buixieval timer on Su-Elle'
+    text: 'BuixievalTimer on Buixieval board',
 }];
 
 const teamOpportunities = [{
     cost: 0.68,
-    text: 'Free beer!'
+    text: 'Free beer!',
 },{
     cost: 50,
-    text: 'Buixieval stickers'
+    text: 'Buixieval stickers',
 }, {
     cost: 100,
-    text: 'Franckenfruit'
+    text: 'Franckenfruit',
+}, {
+    cost: 450,
+    text: 'Pink vs. Blue Borrel',
+}, {
+    cost: 500,
+    text: 'Livestream',
+}, {
+    cost: 1000,
+    text: 'Daniëlle',
 }];
 
 const Container = styled.div`
@@ -53,19 +65,12 @@ const Td = styled.td`
     padding: 10px;
 `;
 
-const Note = styled.p`
-    margin-top: 10px;
-    font-size: 12px;
-    color: #000;
-`;
-
 const H2 = styled.h2`
     color: #000;
 `;
 
 const Opportunities = ({ dominantTeam }) => {
     const DominantTable = dominantTeam === 'p' ? PinkTable : BlueTable;
-    console.log(dominantTeam);
     return (
         <div>
             <Menu/>
@@ -83,7 +88,6 @@ const Opportunities = ({ dominantTeam }) => {
                         ))}
                         </tbody>
                     </DominantTable>
-                    <Note>* Early bird only, available until February first, gifts will arrive shortly before Buixieval.</Note>
                 </div>
 
                 <div>

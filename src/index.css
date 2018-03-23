@@ -27,6 +27,30 @@ body {
   animation: 1s ease 0s normal none infinite fontShift;
 }
 
+.calendar-item {
+  background-color: #000;
+  color: #ff99ff!important;
+  padding: 20px;
+  margin: 20px;
+  width: 40%;
+}
+
+.calendar-item > h1 {
+  color: #ff99ff !important;
+}
+
+@media only screen and (max-width: 1200px) {
+  .calendar-item {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .calendar-item {
+    width: 100%
+  }
+}
+
 @keyframes fontShift {
   from {font-size: 36px;}
   to {font-size: 194px;}

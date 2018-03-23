@@ -6,6 +6,7 @@ import Admin from './Admin';
 import Opportunities from './Opportunities';
 import Backers from './Backers';
 import Captains from './Captains';
+import Calendar from './Calendar';
 
 export const routes = [{
 	path: '/backers',
@@ -24,6 +25,12 @@ export const routes = [{
 	component: Admin,
 	exact: true,
 	visible: false,
+}, {
+	path: '/calendar',
+	name: 'Calendar',
+	component: Calendar,
+	exact: true,
+	visible: true,
 }, {
 	path: '/captains',
 	name: 'Captains',

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
 import Menu from '../../components/Menu';
-import fetchBackers from '../../functions/fetch-backers';
 
 import './site.css';
 
