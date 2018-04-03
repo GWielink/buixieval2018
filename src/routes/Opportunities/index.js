@@ -29,7 +29,7 @@ const teamOpportunities = [{
     text: 'Franckenfruit',
 }, {
     cost: 450,
-    text: 'Pink vs. Blue Borrel',
+    text: 'Buixieval stripe system',
 }, {
     cost: 500,
     text: 'Livestream',
