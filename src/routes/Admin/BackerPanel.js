@@ -19,6 +19,7 @@ class BackerForm extends Component {
             contributed: this.props.backer.contributed,
             team: this.props.backer.team,
             id: this.props.backer.id,
+            f_id: this.props.backer.f_id,
             new: this.props.backer.new,
         };
     }
@@ -42,6 +43,7 @@ class BackerForm extends Component {
                 name: this.state.name,
                 contributed: this.state.contributed,
                 team: this.state.team,
+                f_id: this.state.f_id,
                 img: this.state.img,
             }).then(id => {
                 this.setState({
@@ -62,6 +64,7 @@ class BackerForm extends Component {
             name: this.state.name,
             contributed: this.state.contributed,
             team: this.state.team,
+            f_id: this.state.f_id,
             img: this.state.img,
         }).then(() => {
             this.setState({
@@ -118,6 +121,15 @@ class BackerForm extends Component {
                             <option value="b">Blue</option>
                             <option value="bstuur">Bstuur</option>
                         </FormControl>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <ControlLabel>Francken id</ControlLabel>
+                        <FormControl
+                            type="text"
+                            value={this.state.f_id}
+                            onChange={({target: {value}}) => this.setField('f_id', value)}
+                        />
                     </FormGroup>
 
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
