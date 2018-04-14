@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {PanelGroup} from 'react-bootstrap';
 import AuthContainer from '../../components/AuthContainer';
 import BackerPanel from './BackerPanel';
-
+import updateStreamKey from '../../functions/update-steam-key';
 
 class Admin extends Component {
     constructor (props) {
@@ -12,6 +12,7 @@ class Admin extends Component {
         this.state = {
             authenticated: false,
             backers: this.props.backers,
+            streamKey: this.props.streamKey,
         }
     }
 
@@ -30,6 +31,17 @@ class Admin extends Component {
                 new: true,
             })
         });
+    }
+
+    handleStreamKeyChange = ({target: { value }}) => {
+        console.log(value);
+        this.setState({
+            streamKey: value,
+        })
+    };
+
+    updateStreamKey = () => {
+        updateStreamKey(this.state.streamKey);
     };
 
     render () {
@@ -38,6 +50,14 @@ class Admin extends Component {
         }
         return (
             <div style={{ padding: 50 }}>
+                <input
+                    type="text"
+                    value={this.state.streamKey}
+                    onChange={this.handleStreamKeyChange}
+                    style={{ color: '#000'}}
+                />
+                <button onClick={this.updateStreamKey}> save </button>
+
                 <PanelGroup style={{ color: 'black' }}>
                     {this.state.backers.map(backer => (
                         <BackerPanel key={backer.id} backer={backer} />
@@ -56,6 +76,7 @@ class Admin extends Component {
 
 const mapStateToProps = state => ({
     backers: state.backers,
+    streamKey: state.streamKey,
 });
 
 export default connect(mapStateToProps)(Admin)

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Loader from '../components/Loader';
-import {setBackers, setDominantTeam, setTopBackers} from '../store/actions';
+import {setBackers, setDominantTeam, setTopBackers, setStreamKey} from '../store/actions';
 import fetchBackers from '../functions/fetch-backers';
+import fetchStreamKey from '../functions/fetch-stream-key';
 
 class AppContainer extends Component {
 	constructor (props) {
@@ -17,6 +18,13 @@ class AppContainer extends Component {
 			this.setBackground(backers);
 			this.setDominantTeam(backers);
 			this.setTopBackers(backers);
+			this.fetchStreamKey();
+		});
+	}
+
+	fetchStreamKey () {
+		fetchStreamKey().then((key) => {
+			this.props.setStreamKey(key);
 			this.setState({isReady: true});
 		});
 	}
@@ -82,6 +90,7 @@ const mapDispatchToProps = dispatch => ({
 	setBackers: backers => dispatch(setBackers(backers)),
 	setDominantTeam: team => dispatch(setDominantTeam(team)),
 	setTopBackers: topBackers => dispatch(setTopBackers(topBackers)),
+	setStreamKey: key => dispatch(setStreamKey(key)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

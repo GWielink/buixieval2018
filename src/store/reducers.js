@@ -1,4 +1,4 @@
-import {SET_BACKERS, BACKER_DISPLAY_DETAILS, SET_DOMINANT_TEAM, SET_TOP_BACKERS} from './actions';
+import {SET_BACKERS, BACKER_DISPLAY_DETAILS, SET_DOMINANT_TEAM, SET_TOP_BACKERS, SET_STREAM_KEY} from './actions';
 
 const initialState = {
     backers: [],
@@ -29,6 +29,11 @@ export default function appReducer (state = initialState, action) {
         case SET_TOP_BACKERS:
             return Object.assign({}, state, {
                 topBackers: action.topBackers
+            });
+
+        case SET_STREAM_KEY:
+            return Object.assign({}, state, {
+                streamKey: action.key,
             });
 
         default:

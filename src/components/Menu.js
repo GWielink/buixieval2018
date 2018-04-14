@@ -88,4 +88,4 @@ const mapStateToProps = state => ({
     dominant: state.dominantTeam,
 });
 
-export default connect(mapStateToProps)(withRouter(NewMenu));
+export default connect(mapStateToProps)(withRouter(Menu));
