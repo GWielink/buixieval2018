@@ -9,7 +9,7 @@ export default function () {
         }
     };
 
-    return fetch (path + '/achievements', config)
+    return fetch (path + '/challenges', config)
         .then(response => response.json().then(content => ({ response, content}))).then(({ response, content }) => {
             if(!response.ok) {
                 return Promise.reject(content);
