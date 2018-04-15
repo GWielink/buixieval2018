@@ -15,19 +15,19 @@ class Teaser extends Component {
 			<div style={{ height: 'calc(100vh)', textAlign: 'center'}}>
 				<Menu/>
 				<h1 className="animated"> Live! </h1>
-				<div style={{
-					display: 'flex',
-					flexDirection: 'row',
-					justifyContent: 'center',
-					alignItems: 'center'
-				}}>
-					<ReactPlayer
-						url={url}
-						playing
-						controls
-						volume="0"
-					/>
-				</div>
+				{/*<div style={{*/}
+					{/*display: 'flex',*/}
+					{/*flexDirection: 'row',*/}
+					{/*justifyContent: 'center',*/}
+					{/*alignItems: 'center'*/}
+				{/*}}>*/}
+					{/*<ReactPlayer*/}
+						{/*url={url}*/}
+						{/*playing*/}
+						{/*controls*/}
+						{/*volume="0"*/}
+					{/*/>*/}
+				{/*</div>*/}
 				<h1 className="animated">{new Intl.NumberFormat('nl-NL', {style: 'currency', currency: 'EUR'}).format(totalBacked)}</h1>
 			</div>
 		)

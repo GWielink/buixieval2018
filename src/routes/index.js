@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Teaser from './Teaser';
+import Achievements from './Achievements';
 import Admin from './Admin';
 import Opportunities from './Opportunities';
 import Backers from './Backers';
@@ -13,6 +14,12 @@ export const routes = [{
 	name: 'Backers',
 	component: Backers,
     exact: true,
+	visible: true,
+}, {
+	path: '/achievements',
+	name: 'Competition',
+	component: Achievements,
+	exact: true,
 	visible: true,
 }, {
 	path: '/opportunities',
