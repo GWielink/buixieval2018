@@ -22,6 +22,10 @@ class BackersContainer extends Component {
         this.getBackers();
     }
 
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+
     updateWindowDimensions = () => {
         this.setState({
             width: window.innerWidth,

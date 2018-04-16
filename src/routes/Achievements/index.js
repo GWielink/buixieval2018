@@ -49,10 +49,10 @@ class Achievements extends Component {
                 <Menu/>
                 <div style={{ display: "flex", flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                     <div style={{ backgroundColor: '#000', color: '#01ffff', padding: 30, fontSize: 36}}>
-                        {pinkPoints}
+                        {bluePoints}
                     </div>
                     <div style={{ backgroundColor: '#000', color: '#ff09ff', padding: 30, fontSize: 36}}>
-                        {bluePoints}
+                        {pinkPoints}
                     </div>
                 </div>
                 <h1 style={{ textAlign: 'center', color: '#000'}}>Challenges</h1>

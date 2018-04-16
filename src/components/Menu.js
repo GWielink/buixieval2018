@@ -1,17 +1,27 @@
-import React from 'react';
-import ResponsiveMenu from 'react-responsive-navbar';
+import React, { Component } from 'react';
 import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {routes} from '../routes';
 
-const NewMenu = ({match, activeBacker, dominant}) => (<ResponsiveMenu
-    menuOpenButton={<span>o</span>}
-    menuCloseButton={<span>c</span>}
-    changeMenuOn="700px"
-    menu={<Menu match={match} activeBacker={activeBacker} dominant={dominant} />}
-/>);
 
+const SmallMenu = ({match, activeBacker, dominant}) => {
+    const style = {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        backgroundColor: '#000',
+        width: '100%'
+    };
+
+    return (
+        <div style={style}>
+            {routes.filter(route => route.visible).map(route => (
+                <NavButton key={route.path} route={route} active={match.path === route.path} dominant={dominant} small={true} />
+            ))}
+        </div>
+    )
+};
 
 const Menu = ({match, activeBacker, dominant}) => {
     const style={
@@ -51,7 +61,7 @@ const Menu = ({match, activeBacker, dominant}) => {
     );
 };
 
-const NavButton = ({route, active, dominant}) => {
+const NavButton = ({route, active, dominant, small=false}) => {
     const style = {
         backgroundColor: active ? (dominant === 'p' ? '#FF99FF' : '#01FFFF') : '#000',
         paddingLeft: 10,
@@ -59,7 +69,7 @@ const NavButton = ({route, active, dominant}) => {
         margin: 5,
         height: '40px',
         lineHeight: '40px',
-        display: 'inline-block',
+        display: small ? 'block' : 'inline-block',
         direction: 'column',
         alignItems: 'center',
         color: active  ? '#000' : (dominant === 'p' ? '#FF99FF' : '#01FFFF'),
@@ -83,9 +93,41 @@ const NavButton = ({route, active, dominant}) => {
     )
 };
 
+class MenuResponsive extends Component {
+    constructor (props) {
+        super(props);
+
+        this.state = {width: 1200};
+    }
+
+    updateWindowDimensions = () => {
+        this.setState({
+            width: window.innerWidth,
+        });
+    };
+
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
+    }
+
+    componentWillUnmount () {
+        window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+
+    render () {
+        if (this.state.width > 1000) {
+            return <Menu {...this.props}/>;
+        }
+
+        return <SmallMenu {...this.props}/>;
+    }
+
+}
+
 const mapStateToProps = state => ({
     activeBacker: state.activeBacker,
     dominant: state.dominantTeam,
 });
 
-export default connect(mapStateToProps)(withRouter(Menu));
+export default connect(mapStateToProps)(withRouter(MenuResponsive));
