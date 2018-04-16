@@ -44,7 +44,6 @@ const Container = styled.div`
     justify-content: center;
     align-items: flex-start;
     margin-left: 15px;
-    height: calc(100vh - 50px);
 `;
 
 const Tr = styled.tr`
